@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>MDN Games: Three.js demo</title>
+	<style>
+		body { margin: 0; padding: 0; font-size: 0; }
+		canvas { width: 100%; height: 100%; }
+	</style>
+</head>
+<body>
+<script src="three.min.js"></script>
+<script>
+const scene = new THREE.Scene(); //Espacio en donde se presentan los elementos gráficos
+
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); //Camara perspectiva o ortogonal (Se proyecta)
+	//Parametros
+	//1. Campo de visión en grados
+	//2. Relación aspecto (formato pantalla)
+	//3. Plano de recorte, cerca y lejos, los objetos fuera de esos valores no se renderizan
+
+const renderer = new THREE.WebGLRenderer(); // Renderizador
+renderer.setSize( window.innerWidth, window.innerHeight ); //Tamaño de la ventana y resolución
+document.body.appendChild( renderer.domElement ); //Muestra la escena
+
+const geometry = new THREE.BoxGeometry( 1, 1, 1 ); //Objeto que crea un cubo con sus vertices
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } ); // Material para darle color, 0x00ff00 es un atributo
+const cube = new THREE.Mesh( geometry, material ); //Mesh: objeto que toma una geometria y le aplica el material para luego insertar en la escena
+scene.add( cube ); // Se muestra el cubo en la escena
+
+camera.position.z = 5; //Se posiciona la camara
+
+function animate() { //Funcion para el movimiento del cubo
+	requestAnimationFrame( animate ); //Bucle, va refrescando la animación
+
+	cube.rotation.x += 0.01; //Rotación en el eje x del cubo, va sumando 0.01 grados al eje 
+	cube.rotation.y += 0.01; //Rotación en el eje y del cubo, va sumando 0.01 grados al eje
+
+	renderer.render( scene, camera ); //Renderiza llamando la escena y la camara
+}
+
+animate(); //Llama a la función para mostrarla
+</script>
+</body>
+</html>
