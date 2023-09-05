@@ -11,30 +11,34 @@
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+const scene = new THREE.Scene(); //Espacio en donde se presentan los elementos gráficos
 
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); //Camara perspectiva o ortogonal (Se proyecta)
+	//1. Campo de visión en grados
+	//2. Relación aspecto (formato pantalla)
+	//3. Plano de recorte, cerca y lejos, los objetos fuera de esos valores no se renderizan
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+const renderer = new THREE.WebGLRenderer(); // Renderizador
+renderer.setSize( window.innerWidth, window.innerHeight ); //Tamaño de la ventana y resolución
+document.body.appendChild( renderer.domElement ); //Muestra la escena
 
-camera.position.z = 5;
+const geometry = new THREE.BoxGeometry( 1, 1, 1 ); //Objeto que crea un cubo con sus vertices
+const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } ); // Material para darle color, 0x00ff00 es un atributo
+const cube = new THREE.Mesh( geometry, material ); //Mesh: objeto que toma una geometria y le aplica el material para luego insertar en la escena
+scene.add( cube ); // Se muestra el cubo en la escena
 
-function animate() {
-	requestAnimationFrame( animate );
+camera.position.z = 5; //Se posiciona la camara
 
-	cube.rotation.x += 0.01;
-	cube.rotation.y += 0.01;
+function animate() { //Funcion para el movimiento del cubo
+	requestAnimationFrame( animate ); //Bucle, va refrescando la animación
 
-	renderer.render( scene, camera );
+	cube.rotation.x += 0.01; //Rotación en el eje x del cubo, va sumando 0.01 grados al eje 
+	cube.rotation.y += 0.01; //Rotación en el eje y del cubo, va sumando 0.01 grados al eje
+
+	renderer.render( scene, camera ); //Renderiza llamando la escena y la camara
 }
 
-animate();
+animate(); //Llama a la función para mostrarla
 </script>
 </body>
 </html>
