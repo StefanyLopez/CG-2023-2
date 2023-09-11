@@ -11,27 +11,35 @@
 <body>
 <script src="three.min.js"></script>
 <script>
-const scene = new THREE.Scene(); //Espacio en donde se presentan los elementos gráficos
+const scene = new THREE.Scene(); //Espacio en donde se presentan los elementos gráficos, no usa parámetros.
 
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 ); //Camara perspectiva o ortogonal (Se proyecta)
 	//Parametros
 	//1. Campo de visión en grados
-	//2. Relación aspecto (formato pantalla)
-	//3. Plano de recorte, cerca y lejos, los objetos fuera de esos valores no se renderizan
+	//2. Relación aspecto en pixeles (formato pantalla)
+	//3. Plano de recorte, cerca y lejos, los objetos fuera de esos valores no se renderizan (float)
 
-const renderer = new THREE.WebGLRenderer(); // Renderizador
-renderer.setSize( window.innerWidth, window.innerHeight ); //Tamaño de la ventana y resolución
-document.body.appendChild( renderer.domElement ); //Muestra la escena
+const renderer = new THREE.WebGLRenderer(); // Renderizador.
+	//Parametros, plantilla, interfaz, calidad y precisión, canal alpha, colores, antialising(true or false)
+	//limitación del render suavizado (true or false), aplicar buffer (true or false)
+	//cantidad de GPU que puede consumir ("high-performance"), "low-power" or "default")
+	//cierra el render si el rendimiento es lento, amortiaguador de profundidad (true or false)
+	//dar parametros para el amortiguador de profundidad
+	
+renderer.setSize( window.innerWidth, window.innerHeight ); //Ajusta el tamaño de la ventana y la resolución
+document.body.appendChild( renderer.domElement ); //Muestra la escena añadiendo el render y el cuerpo del archivo
 
-const geometry = new THREE.BoxGeometry( 1, 1, 1 ); //Objeto que crea un cubo con sus vertices
-const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } ); // Material para darle color, 0x00ff00 es un atributo
+const geometry = new THREE.BoxGeometry( 1, 1, 1 ); //Crea un objeto con sus vertices en las coordenadas dadas
+	//Parametros: (ancho, alto, profundo, segmento ancho, segmentos alto, segmentos profundo)
+
+	const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } ); // Objeto que crea un material para darle color, 0x00ff00 es un atributo
 const cube = new THREE.Mesh( geometry, material ); //Mesh: objeto que toma una geometria y le aplica el material para luego insertar en la escena
 scene.add( cube ); // Se muestra el cubo en la escena
 
-camera.position.z = 5; //Se posiciona la camara
+camera.position.z = 5; //Se posiciona la camara en el eje z en grados
 
 function animate() { //Funcion para el movimiento del cubo
-	requestAnimationFrame( animate ); //Bucle, va refrescando la animación
+	requestAnimationFrame( animate ); //Bucle, va refrescando la animación usando su recursividad
 
 	cube.rotation.x += 0.01; //Rotación en el eje x del cubo, va sumando 0.01 grados al eje 
 	cube.rotation.y += 0.01; //Rotación en el eje y del cubo, va sumando 0.01 grados al eje
@@ -39,7 +47,7 @@ function animate() { //Funcion para el movimiento del cubo
 	renderer.render( scene, camera ); //Renderiza llamando la escena y la camara
 }
 
-animate(); //Llama a la función para mostrarla
+animate(); //Llama a la función para mostrarla, no tiene parametros
 </script>
 </body>
 </html>
