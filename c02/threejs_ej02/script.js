@@ -47,30 +47,30 @@ let cubePosition = new THREE.Vector3(5, 0, 0);
 // Agrega un controlador de eventos para detectar cuando se presionan teclas
 document.addEventListener('keydown', (event) => {
   const moveDistance = 0.1; // Distancia de movimiento por cada pulsación de tecla
-
-  switch (event.key) { 
-    case 'w': //Teclas para el movimiento de la esfera
+  const key = event.key.toLowerCase(); //Convierte las mayusculas en minusculas 
+  switch (key) { 
+    case 'w' || 'W': //Teclas para el movimiento de la esfera
       spherePosition.z -= moveDistance;
       break;
-    case 's':
+    case 's' || 'S':
       spherePosition.z += moveDistance;
       break;
-    case 'a':
+    case 'a' || 'A':
       spherePosition.x -= moveDistance;
       break;
-    case 'd':
+    case 'd' || 'D':
       spherePosition.x += moveDistance;
       break;
-    case 'i': //Teclas para el movimiento del cubo
+    case 'i' || 'I': //Teclas para el movimiento del cubo
       cubePosition.z -= moveDistance;
       break;
-    case 'k':
+    case 'k' || 'K':
       cubePosition.z += moveDistance;
       break;
-    case 'j':
+    case 'j' || 'J':
       cubePosition.x -= moveDistance;
       break;
-    case 'l':
+    case 'l' || 'L':
       cubePosition.x += moveDistance;
       break;
   }
