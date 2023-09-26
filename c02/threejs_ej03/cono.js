@@ -38,6 +38,31 @@ for (let i = 1; i <= segmentos; i++) {
 // Calcular normales para las caras
 geometry.computeFaceNormals();
 
+
+// Calcular coordenadas UV manualmente
+geometry.faceVertexUvs[0] = [];
+for (let i = 0; i < segmentos; i++) {
+  const u1 = i / segmentos;
+  const u2 = (i + 1) / segmentos;
+  geometry.faceVertexUvs[0].push([
+    new THREE.Vector2(u1, 1),
+    new THREE.Vector2(u2, 1),
+    new THREE.Vector2(0.5, 0.5)
+  ]);
+}
+
+// Mapeo UV para la parte superior del cono
+for (let i = 0; i < segmentos; i++) {
+  const u1 = i / segmentos;
+  const u2 = (i + 1) / segmentos;
+  geometry.faceVertexUvs[0].push([
+    new THREE.Vector2(u1, 0),
+    new THREE.Vector2(u2, 0),
+    new THREE.Vector2(0.5, 0.5)
+  ]);
+}
+
+
 const loader = new THREE.TextureLoader();
 const textura = loader.load("pinguino.png"); // Reemplaza con la ruta correcta de tu imagen
 
@@ -48,21 +73,34 @@ scene.add(customMesh);
 
 camera.position.z = 20;
 
-document.addEventListener('keydown', (event)=> {
-  if(event.key === 'a' || event.key === 'A'){
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'a' || event.key === 'A') {
+    customMesh.position.x -= 0.1;
+  } else if (event.key === 'd' || event.key === 'D') {
+    customMesh.position.x += 0.1;
+  } else if (event.key === 'w' || event.key === 'W') {
+    customMesh.position.y += 0.1;
+  } else if (event.key === 's' || event.key === 'S') {
+    customMesh.position.y -= 0.1;
+  } else if (event.key === 'i' || event.key === 'I') {
+    customMesh.rotation.y += 0.1;
+  } else if (event.key === 'j' || event.key === 'J') {
+    customMesh.rotation.x += 0.1;
+  } else if (event.key === 'k' || event.key === 'K') {
+    customMesh.rotation.y -= 0.1;
+  } else if (event.key === 'l' || event.key === 'L') {
     customMesh.rotation.x -= 0.1;
-  }else if(event.key === 'd' || event.key === 'D'){
-    customMesh.rotation.x +=0.1;
-  } else if (event.key === 'w' || event.key === 'W'){
-    customMesh.rotation.z +=0.1;
+  } else if (event.key === 'q' || event.key === 'Q') {
+    customMesh.rotation.z += 0.1;
+  } else if (event.key === 'e' || event.key === 'E') {
+    customMesh.rotation.z -= 0.1;
   }
 
 })
 
 function animate() {
   requestAnimationFrame(animate);
-  customMesh.rotation.x += 0.01;
-  customMesh.rotation.y += 0.01; // Rotar el cono
+
   renderer.render(scene, camera);
 }
 
