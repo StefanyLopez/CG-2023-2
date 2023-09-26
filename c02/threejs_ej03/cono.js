@@ -9,9 +9,9 @@ document.body.appendChild(renderer.domElement); // Muestra la escena
 const geometry = new THREE.Geometry();
 
 // Definir los vértices del cono
-const altura = 2; // Altura del cono
-const radio = 1; // Radio de la base del cono
-const segmentos = 8; // Número de segmentos para la base del cono
+const altura = 20; // Altura del cono
+const radio = 10; // Radio de la base del cono
+const segmentos = 80; // Número de segmentos para la base del cono
 
 // Vértice del vértice del cono
 geometry.vertices.push(new THREE.Vector3(0, altura / 2, 0));
@@ -38,16 +38,26 @@ for (let i = 1; i <= segmentos; i++) {
 // Calcular normales para las caras
 geometry.computeFaceNormals();
 
-// Calcular normales para los vértices
-geometry.computeVertexNormals();
+const loader = new THREE.TextureLoader();
+const textura = loader.load("pinguino.png"); // Reemplaza con la ruta correcta de tu imagen
 
-
-const material = new THREE.MeshNormalMaterial({ color: 0x00ff00, wireframe: false, side: THREE.DoubleSide });
+const material = new THREE.MeshBasicMaterial({ map: textura, wireframe: false, side: THREE.DoubleSide });
 
 const customMesh = new THREE.Mesh(geometry, material);
 scene.add(customMesh);
 
-camera.position.z = 5;
+camera.position.z = 20;
+
+document.addEventListener('keydown', (event)=> {
+  if(event.key === 'a' || event.key === 'A'){
+    customMesh.rotation.x -= 0.1;
+  }else if(event.key === 'd' || event.key === 'D'){
+    customMesh.rotation.x +=0.1;
+  } else if (event.key === 'w' || event.key === 'W'){
+    customMesh.rotation.z +=0.1;
+  }
+
+})
 
 function animate() {
   requestAnimationFrame(animate);
