@@ -1,0 +1,14 @@
+¿Qué pasa si cambia la curva por una línea recta? ¿Cómo se verá el tubo en este caso?
+Si cambiara la curva por una línea recta, el tubo también sería una línea recta,
+ya que su forma se define por la trayectoria que sigue la curva.
+El tubo se adaptaría a la nueva geometría de la línea recta se vería como una línea recta tridimensional.
+
+¿Qué sucede si ajusta el grosor del tubo o cambia el material utilizado para renderizarlo?
+Si se ajusta el grosor del tubo, cambia el diámetro del mismo. Esto afecta su apariencia visual,
+ya que un tubo más grueso ocupará más espacio en la escena y será más prominente. Por otro lado, al
+cambiar el material utilizado para renderizar el tubo afectará su apariencia en términos de color,
+textura, brillo y/o sombras.
+
+¿Puede añadir iluminación y sombreado para mejorar la visualización del tubo?
+Sí, esto hará que la visualización del tubo sea mejor y se puedan ver diferentes efectos visuales
+en la figura.
