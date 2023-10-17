@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Three.js: TorusKnot, Cubo y Cono</title>
+    <style>
+      body { margin: 0; } 
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> 
+    <script>
+      // Crear una escena
+      const scene = new THREE.Scene(); 
+
+      // Crea una cámara con proyección de perspectiva.
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); 
+
+      // Configura la posición de la cámara
+      camera.position.z = 10; 
+
+      // Crear un renderizador
+      const renderer = new THREE.WebGLRenderer(); 
+      renderer.setSize(window.innerWidth, window.innerHeight); 
+      document.body.appendChild(renderer.domElement); 
+
+      // Crear un TorusKnotGeometry grande en el centro
+      const geometryTorusKnot = new THREE.TorusKnotGeometry(4, 0.7, 150, 20); // Crea la geometría del objeto TorusKnot.
+      const materialTorusKnot = new THREE.MeshNormalMaterial({ color: 0xff00ff, side: THREE.FrontSide }); // Activa el Back-Face Culling para mostrar solo las caras frontales.
+      const torusKnot = new THREE.Mesh(geometryTorusKnot, materialTorusKnot); // Crea un objeto Mesh con la geometría y el material.
+      scene.add(torusKnot); // Agrega el objeto a la escena.
+
+      // Crear un cubo
+      const geometryCube = new THREE.BoxGeometry(); // Crea la geometría del cubo.
+      const materialCube = new THREE.MeshNormalMaterial({ color: 0x00ff00, side: THREE.FrontSide }); // Activa el Back-Face Culling para mostrar solo las caras frontales.
+      const cube = new THREE.Mesh(geometryCube, materialCube); // Crea un objeto Mesh con la geometría y el material.
+      // Coloca el cubo en el centro 
+      cube.position.set(0, 0, 0); // Establece la posición del cubo en el centro del TorusKnot.
+      torusKnot.add(cube); // Agrega el cubo como hijo del TorusKnot, creando una jerarquía.
+
+      // Crear un cono
+      const geometryCone = new THREE.ConeGeometry(0.5, 1, 16); // Crea la geometría del cono.
+      const materialCone = new THREE.MeshNormalMaterial({ color: 0x0000ff, side: THREE.FrontSide }); // Activa el Back-Face Culling para mostrar solo las caras frontales.
+      const cone = new THREE.Mesh(geometryCone, materialCone); // Crea un objeto Mesh con la geometría y el material.
+     
+      cone.position.set(0, 1, 0); // Establece la posición del cono 
+      cube.add(cone); // Agrega el cono como hijo del cubo, creando una jerarquía.
+
+      // Parámetros de rotación
+      let cubeRotation = 0; // Inicializa una variable para la rotación del cubo.
+      let torusKnotRotation = 0; // Inicializa una variable para la rotación del TorusKnot.
+
+      // Animación
+      const animate = () => {
+        requestAnimationFrame(animate); // Solicita la próxima animación.
+
+        // Rota el cubo
+        cube.rotation.x += 0.01; // Incrementa la rotación del cubo en el eje X.
+        cube.rotation.y += 0.01; // Incrementa la rotación del cubo en el eje Y.
+
+        // Rota el TorusKnot grande
+        torusKnotRotation += 0.005; // Incrementa la rotación del TorusKnot.
+        torusKnot.rotation.x = torusKnotRotation; // Aplica la rotación al TorusKnot en el eje X.
+        torusKnot.rotation.y = torusKnotRotation; // Aplica la rotación al TorusKnot en el eje Y.
+
+        // Renderiza la escena
+        renderer.render(scene, camera); // Renderiza la escena con la cámara actual.
+
+      };
+
+      animate(); // Inicia la animación.
+    </script>
+  </body>
+</html>
