@@ -51,7 +51,7 @@ torus3.scale.set(0.1,0.1,0.1)
 torus3.rotation.x = Math.PI/2
 torus3.position.set(0,1.5,0)
 
-const Sombrerogeometry = new THREE.CylinderGeometry(4, 3, 20, 32); // Geometría del cono (radio, altura, segmentos)
+const Sombrerogeometry = new THREE.CylinderGeometry(8, 4, 22, 32); // Geometría del cono (radio, altura, segmentos)
 const Sombreromaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
 const sombrero = new THREE.Mesh(Sombrerogeometry, Sombreromaterial);
 sombrero.scale.set(0.1,0.1,0.1)
