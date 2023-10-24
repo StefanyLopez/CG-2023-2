@@ -44,10 +44,22 @@ const torus2 = new THREE.Mesh( TorusGeometry2, TorusMaterial2 );
 torus2.scale.set(0.08,0.08,0.08)
 torus2.position.z = -0.8
 
+const TorusGeometry3 = new THREE.TorusGeometry( 6, 3, 3, 100 ); 
+const TorusMaterial3 = new THREE.MeshLambertMaterial( { color: 0x494949 } ); 
+const torus3 = new THREE.Mesh( TorusGeometry3, TorusMaterial3 ); 
+torus3.scale.set(0.1,0.1,0.1)
+torus3.rotation.x = Math.PI/2
+torus3.position.set(0,1.5,0)
+
+const Sombrerogeometry = new THREE.CylinderGeometry(4, 3, 20, 32); // Geometría del cono (radio, altura, segmentos)
+const Sombreromaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+const sombrero = new THREE.Mesh(Sombrerogeometry, Sombreromaterial);
+sombrero.scale.set(0.1,0.1,0.1)
+sombrero.position.y = 2.5
 
 // Configurar jerarquía
 const container = new THREE.Object3D(); // Crear un contenedor
-container.add(cone, cylinder1, cylinder2, cylinder3, cylinder4, torus, torus2); // Agregar el cono y los cubos al contenedor
+container.add(cone, cylinder1, cylinder2, cylinder3, cylinder4, torus, torus2, torus3, sombrero); // Agregar el cono y los cubos al contenedor
 scene.add(container); // Agregar el contenedor a la escena
 
 // Configuración de la cámara y la posición inicial
